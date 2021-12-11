@@ -170,6 +170,17 @@ const ChatInboxList = ({
 };
 
 const MessageBox = ({ currentChat, opponent, fakeUserId }) => {
+
+  // const BottomMessage= useRef(null)
+  // const scrollToBottom = () => {
+  //   BottomMessage.current?.scrollIntoView({behavior:"smooth"})
+
+  // };
+
+  // useEffect(() => {
+  //   scrollToBottom()
+  // },[currentChat])
+    // ref was created to scroll to bottom on new message event
   const BottomMessage= useRef(null)
   const scrollToBottom = () => {
     BottomMessage.current?.scrollIntoView({behavior:"smooth"})
@@ -320,6 +331,7 @@ const MessageBox = ({ currentChat, opponent, fakeUserId }) => {
               );
             }
           })}
+          {/* here is bottom div whom reference was created */}
           <div ref={BottomMessage}/>
       </Grid>
           
