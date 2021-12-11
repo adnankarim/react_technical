@@ -192,6 +192,7 @@ const MessageBox = ({ currentChat, opponent, fakeUserId }) => {
       }
     }
   };
+  //This was function to get image from received message
   const getReceivedImage = (singleChat, userId, msg) => {
     console.log(msg + "in getAttachmentImage");
     if (singleChat != null) {
@@ -205,6 +206,19 @@ const MessageBox = ({ currentChat, opponent, fakeUserId }) => {
       }
     }
   };
+  // const getReceivedImage = (singleChat, userId, msg) => {
+  //   console.log(msg + "in getAttachmentImage");
+  //   if (singleChat != null) {
+  //     console.log(msg + "in first if");
+  //     if (singleChat.extension != null || singleChat.extension != undefined) {
+  //       console.log(msg + "in second if");
+  //       const chatApi = getChatApi();
+  //       const id = singleChat.extension.attachments[0].id
+  //       const url = chatApi.getImageFullUrl(userId, id);
+  //       return <Photo src={url} height={"100px"} />;
+  //     }
+  //   }
+  // };
   console.log({ currentChat });
   const user = opponent;
   console.log({ opponent });
@@ -236,6 +250,7 @@ const MessageBox = ({ currentChat, opponent, fakeUserId }) => {
                         <Photo src={value.url} height={"100px"} />
                       </a>
                     )}
+                    {/* called here */}
                     {(value.recipient_id !== opponent.user_id )&& (value.recieved_message==true ) && (
                       getReceivedImage(value, fakeUserId, "Current User")
                     )}
