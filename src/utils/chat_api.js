@@ -222,6 +222,7 @@ class ChatApi {
         console.log({ connections: this.connections })
         if (!conn)
             throw { error: "Connection not found" }
+            // here sort_desc changed to sort_asc to fix order of messages
         const params = {
             chat_dialog_id: dialogue_id,
             sort_asc: 'date_sent',
