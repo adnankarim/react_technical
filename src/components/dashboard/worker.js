@@ -243,6 +243,7 @@ const MessageBox = ({ currentChat, opponent, fakeUserId }) => {
         {currentChat &&
           currentChat.map((value) => {
             const date = new Date(value.created_at);
+          
             const popUp = (
               <Popup
                 trigger={
@@ -251,6 +252,7 @@ const MessageBox = ({ currentChat, opponent, fakeUserId }) => {
                     size="tiny"
                     style={{
                       background:
+                      // here logic was added to display correct color for received message and alignment
                         (value.recipient_id !== opponent.user_id && (value.recieved_message==null || value.recieved_message==undefined )) 
                           ? "#00b5ad"
                           : "",
@@ -266,8 +268,10 @@ const MessageBox = ({ currentChat, opponent, fakeUserId }) => {
                       getReceivedImage(value, fakeUserId, "Current User")
                     )}
                     {getAttachmentImage(value, fakeUserId, "Current User")}
+                    {/* // here logic was added to display correct color for received message and alignment */}
                     <p
                       style={{
+                        
                         color:
                           (value.recipient_id !== opponent.user_id  && (value.recieved_message==null || value.recieved_message==undefined ))
                           
@@ -304,6 +308,7 @@ const MessageBox = ({ currentChat, opponent, fakeUserId }) => {
                 // position='bottom right'
               />
             );
+            // // here logic was added to display correct color for received message and alignment
             if (
               (value.recipient_id === opponent.user_id || value.recipient_id==null || value.recieved_message==true   )
             ) {
