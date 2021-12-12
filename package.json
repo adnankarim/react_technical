@@ -8,6 +8,7 @@
         "@testing-library/user-event": "^12.6.0",
         "chart.js": "^2.9.4",
         "firebase": "^8.2.3",
+        "graphql": "^16.1.0",
         "js-base64": "^3.6.0",
         "quickblox": "^2.13.10",
         "react": "^17.0.1",

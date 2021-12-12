@@ -100,6 +100,7 @@ const ChatInboxItem = ({
   item,
 }) => {
   const user = allUsers[dialogue.friendId];
+  // if(user.is_fake!==null && user.is_fake!==undefined && !user.is_fake){
   const currentUnreadMessages = dialogue.unread_messages_count;
   const active = currentChat == dialogue._id;
   const locationdata = user?.location?.split(",");
@@ -138,7 +139,11 @@ const ChatInboxItem = ({
       </List.Content>
     </List.Item>
   );
-};
+}
+// else{
+//   return <></>
+// }
+// };
 
 /**
  * Display data from chat.fakeUserChatDialogues[currentlySelectedFakeUser]
@@ -151,7 +156,9 @@ const ChatInboxList = ({
   chatDialogues = [],
 }) => {
   console.log({ allUsers, chatDialogues });
+// const filters= Object
 
+// console.log(filters,"here")
   return (
     <List divided relaxed selection>
       {chatDialogues.map((dialogue) => (
@@ -211,9 +218,18 @@ const MessageBox = ({ currentChat, opponent, fakeUserId }) => {
       if (singleChat.extension != null || singleChat.extension != undefined) {
         console.log(msg + "in second if");
         const chatApi = getChatApi();
-        const id = singleChat.extension.attachments[0].id
-        const url = chatApi.getImageFullUrl(userId, id);
-        return <Photo src={url} height={"100px"} />;
+        if (
+          singleChat.extension.attachments !== undefined &&
+          singleChat.extension.attachments !== null &&
+          singleChat.extension.attachments[0] !== undefined &&
+          singleChat.extension.attachments[0] !== null
+        ) {
+          const id = singleChat.extension.attachments[0].id;
+          const url = chatApi.getImageFullUrl(userId, id);
+          return <Photo src={url} height={"100px"} />;
+        } else {
+          return <div />;
+        }
       }
     }
   };
@@ -252,8 +268,10 @@ const MessageBox = ({ currentChat, opponent, fakeUserId }) => {
                     size="tiny"
                     style={{
                       background:
-                      // here logic was added to display correct color for received message and alignment
-                        (value.recipient_id !== opponent.user_id && (value.recieved_message==null || value.recieved_message==undefined )) 
+                        // here logic was added to display correct color for received message and alignment
+                        value.recipient_id !== opponent.user_id &&
+                        (value.recieved_message == null ||
+                          value.recieved_message == undefined)
                           ? "#00b5ad"
                           : "",
                     }}
@@ -264,17 +282,16 @@ const MessageBox = ({ currentChat, opponent, fakeUserId }) => {
                       </a>
                     )}
                     {/* called here */}
-                    {(value.recipient_id !== opponent.user_id )&& (value.recieved_message==true ) && (
-                      getReceivedImage(value, fakeUserId, "Current User")
-                    )}
+                    {
+                      getReceivedImage(value, fakeUserId, "Current User")}
                     {getAttachmentImage(value, fakeUserId, "Current User")}
                     {/* // here logic was added to display correct color for received message and alignment */}
                     <p
                       style={{
-                        
                         color:
-                          (value.recipient_id !== opponent.user_id  && (value.recieved_message==null || value.recieved_message==undefined ))
-                          
+                          value.recipient_id !== opponent.user_id &&
+                          (value.recieved_message == null ||
+                            value.recieved_message == undefined)
                             ? "#fff"
                             : "",
                       }}
